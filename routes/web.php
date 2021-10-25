@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AjaxUploadController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageFileController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
@@ -109,3 +111,14 @@ Route::post('/upload-doc-file', [AjaxUploadController::class, 'uploadToServer'])
 
 // 13 Xml Seo
 Route::get('/sitemap.xml', [SitemapXmlController::class, 'index']);
+
+// 14. Membuat Watermark foto
+// Link: https://www.positronx.io/laravel-add-text-overlay-watermark-on-image-tutorial/
+Route::get('/file-upload', [ImageFileController::class, 'index']);
+Route::post('/add-watermark', [ImageFileController::class, 'imageFileUpload'])->name('image.watermark');
+
+// 15 Summernote
+// Link : https://www.positronx.io/how-to-upload-image-in-laravel-using-summernote-editor/
+Route::get('/summernote-editor-upload', [EmployeeController::class, 'index']);
+
+Route::post('file-upload', [EmployeeController::class, 'fileUpload']);
