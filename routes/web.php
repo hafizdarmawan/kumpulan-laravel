@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SitemapXmlController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UploadImageController;
 use App\Http\Controllers\UserController;
@@ -105,3 +106,6 @@ Route::post('my-form', [AjaxController::class, 'myformPost'])->name('my.form');
 // 12. Upload File Progressbar
 Route::get('/file-upload', [AjaxUploadController::class, 'index']);
 Route::post('/upload-doc-file', [AjaxUploadController::class, 'uploadToServer']);
+
+// 13 Xml Seo
+Route::get('/sitemap.xml', [SitemapXmlController::class, 'index']);
