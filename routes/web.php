@@ -120,5 +120,9 @@ Route::post('/add-watermark', [ImageFileController::class, 'imageFileUpload'])->
 // 15 Summernote
 // Link : https://www.positronx.io/how-to-upload-image-in-laravel-using-summernote-editor/
 Route::get('/summernote-editor-upload', [EmployeeController::class, 'index']);
+Route::post('file-upload-summernote', [EmployeeController::class, 'fileUpload']);
 
-Route::post('file-upload', [EmployeeController::class, 'fileUpload']);
+
+// 16. Resize Image
+Route::get('/file-resize', [ResizeController::class, 'index']);
+Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
