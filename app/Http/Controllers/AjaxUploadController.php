@@ -2,70 +2,31 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\FileUpload;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
-class AjaxController extends Controller
+class AjaxUploadController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function ajaxRequest()
-    {
-        return view('ajaxRequest.index');
-    }
-
-
-    public function ajaxRequestPost(Request $request)
-    {
-
-        // $request->validate([
-        //     'name'      => 'required',
-        //     'emal'      => 'required',
-        //     'password'  => 'required'
-        // ]);
-
-        $input = $request->all();
-        Log::info($input);
-        return response()->json(['success' => 'Input Berhasil']);
-    }
-
-
-    public function myform()
-    {
-        return view('myform.index');
-    }
-
-    public function myformPost(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name'    => 'required',
-            'last_name'     => 'required',
-            'email'         => 'required',
-            'address'       => 'required'
-        ]);
-
-        if ($validator) {
-            return response()->json(['success' => 'Added New Record']);
-        }
-
-        return response()->json(['error' => $validator->errors()->all()]);
-    }
-
-
-
-
-
     public function index()
     {
-        //
+        return view('ajaxuploadprogress.index');
     }
 
+    public function uploadToServer(Request $request)
+    {
+        $request->validate([
+            'file'  => 'required|mimes:pdf,xlsx,csv,jpg,png,jpeg|max:2048'
+        ]);
+        $fileName = time() . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
+        FileUpload::create(['name' => $fileName]);
+        return response()->json(['success', 'Successfully Uploads']);
+    }
     /**
      * Show the form for creating a new resource.
      *

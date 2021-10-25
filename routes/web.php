@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\AjaxUploadController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyController;
@@ -99,3 +100,8 @@ Route::get('users', [UserController::class, 'index'])->name('users.index');
 // 12. Ajax Validasi
 Route::get('my-form', [AjaxController::class, 'myform']);
 Route::post('my-form', [AjaxController::class, 'myformPost'])->name('my.form');
+
+
+// 12. Upload File Progressbar
+Route::get('/file-upload', [AjaxUploadController::class, 'index']);
+Route::post('/upload-doc-file', [AjaxUploadController::class, 'uploadToServer']);
